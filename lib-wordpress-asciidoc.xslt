@@ -31,10 +31,74 @@
   <xsl:mode name="wordpress-asciidoc" on-no-match="shallow-copy"/>
 
   <xsl:template mode="wordpress-asciidoc" match="body">
-    <xsl:apply-templates mode="html-asciidoc"/>
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="comment()"/>
+
+  <xsl:template mode="wordpress-asciidoc" match="p|ul|ol">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+
+  <!-- There should not be an H1, let's export as H2 -->
+  <xsl:template mode="wordpress-asciidoc" match="h1">
+    <xsl:text>&#xA;== </xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:text>&#xA;</xsl:text>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="h2">
+    <xsl:text>&#xA;</xsl:text>
+    <xsl:if test="../h1">
+      <xsl:text>=</xsl:text>
+    </xsl:if>
+    <xsl:text>== </xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:text>&#xA;</xsl:text>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="h3">
+    <xsl:text>&#xA;</xsl:text>
+    <xsl:if test="../h1">
+      <xsl:text>=</xsl:text>
+    </xsl:if>
+    <xsl:text>=== </xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:text>&#xA;</xsl:text>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="pre">
+    <xsl:text>&#xA;[source]&#xA;....&#xA;{.}&#xA;....&#xA;</xsl:text>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="strong">
+    <xsl:text>*</xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:text>*</xsl:text>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="em">
+    <xsl:text>_</xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:text>_</xsl:text>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="ul/li">
+    <xsl:text>&#xA;* </xsl:text>
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+
+  <xsl:template mode="wordpress-asciidoc" match="ol/li">
+    <xsl:text>&#xA;. </xsl:text>
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
 
   <xsl:template mode="wordpress-asciidoc" match="a">
-    <xsl:text>{@href}[{text()}]</xsl:text>
+    <xsl:text>{@href}[</xsl:text>
+    <xsl:apply-templates mode="#current"/>
+    <xsl:if test="@target='_blank'">
+      <xsl:text>^</xsl:text>
+    </xsl:if>
+    <xsl:text>]</xsl:text>
   </xsl:template>
 </xsl:stylesheet>
