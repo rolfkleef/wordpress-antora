@@ -1,0 +1,16 @@
+<article class="doc">
+{{#if page.attributes.wp-export-date}}
+<div class="exampleblock">
+  <div class="content">
+    <p>Wordpress export: {{site.title}}, {{page.attributes.wp-export-date}}</p>
+    <p>Page: <a href="{{{page.attributes.wp-link}}}" target="_blank">{{page.attributes.wp-link}}</a></p>
+    <p>Keywords: {{page.keywords}}</p>
+  </div>
+</div>
+{{/if}}
+{{#with page.title}}
+<h1 class="page">{{{this}}}</h1>
+{{/with}}
+{{{page.contents}}}
+{{> pagination}}
+</article>
