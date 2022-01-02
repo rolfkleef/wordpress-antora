@@ -2,10 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://wp2antora.wordpress.com/</loc>
-<lastmod>2022-01-02T16:04:49.423Z</lastmod>
+<lastmod>2022-01-02T23:40:25.308Z</lastmod>
 </url>
 <url>
 <loc>https://wp2antora.wordpress.com/2022/01/02/hello-world/</loc>
-<lastmod>2022-01-02T16:04:49.423Z</lastmod>
+<lastmod>2022-01-02T23:40:25.308Z</lastmod>
+</url>
+<url>
+<loc>https://wp2antora.wordpress.com/2022/01/02/starting-conversion-of-content/</loc>
+<lastmod>2022-01-02T23:40:25.308Z</lastmod>
 </url>
 </urlset>
