@@ -6,8 +6,10 @@
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:wp="http://wordpress.org/export/1.2/"
   xmlns:a="http://drostan.org/wordpress-antora"
-  expand-text="yes">
+  expand-text="yes"
+  exclude-result-prefixes="#all">
   
+  <xsl:output omit-xml-declaration="true"/>
   <xsl:mode on-no-match="shallow-skip"/>
   <xsl:mode name="nav" on-no-match="deep-skip"/>
   
@@ -100,7 +102,9 @@ include::wordpress-antora::partial$blog-index-page-hints.adoc[]
 :keywords: {string-join(category, ', ')}
 
 <xsl:try>
-  <xsl:apply-templates select="parse-xml(a:html_content(content:encoded))/body" mode="html-asciidoc"/>
+  <xsl:sequence>
+    <xsl:message>Processed: {link}</xsl:message>
+  </xsl:sequence>
   <xsl:catch>
     <xsl:message>Cannot parse, included verbatim: {link}</xsl:message>
 CAUTION:: unable to process content, source included verbatim
@@ -110,6 +114,15 @@ CAUTION:: unable to process content, source included verbatim
 ++++
   </xsl:catch>
 </xsl:try>
+    </xsl:result-document>
+    
+    <xsl:result-document method="xml" href="export/modules/ROOT/pages/{a:post_filename(.)}.xml">
+      <xsl:try>
+        <xsl:sequence select="parse-xml(a:html_content(content:encoded))/body"/>
+        <xsl:catch>
+          <xsl:text>Cannot parse: {link}</xsl:text>
+        </xsl:catch>
+      </xsl:try>
     </xsl:result-document>
   </xsl:template>
 </xsl:stylesheet>
