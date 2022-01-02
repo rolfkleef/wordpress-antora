@@ -1,0 +1,32 @@
+name: Generate docs website
+on:
+  push:
+    branches:
+      - main
+    
+jobs:
+  antora:
+    runs-on: ubuntu-latest
+    container: node:16-buster
+    
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
+
+      - name: Setup environment
+        run: npm i
+
+      - name: Convert Wordpress demo content
+        run: npm run convert
+
+      - name: Generate Antora site
+        run: npm run build
+
+      - name: Deploy site
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/site
+          publish_branch: site

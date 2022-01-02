@@ -5,7 +5,7 @@
   "repository": "rolfkleef/wordpress-antora",
   "scripts": {
     "convert": "xslt3 -xsl:wordpress-antora.xslt -s:${WORDPRESS_EXPORT:-wordpress-export.xml}",
-    "build": "antora --stacktrace ${PLAYBOOK:-playbook-wordpress-export.yml}",
+    "build": "antora ${PLAYBOOK:-playbook-wordpress-export.yml}",
     "serve": "http-server build/site",
     "release": "standard-version"
   },
