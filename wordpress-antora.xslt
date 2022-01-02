@@ -77,9 +77,16 @@ asciidoc:
     <xsl:apply-templates/>
 
     <xsl:result-document format="adoc" href="export/modules/ROOT/nav.adoc">
-      <xsl:apply-templates mode="nav">
+      <xsl:for-each-group select="item[wp:post_type='post' and wp:status='publish']"
+        group-by="tokenize(a:post_filename(.), '/')[1]" >
         <xsl:sort select="link"/>
-      </xsl:apply-templates>
+        <xsl:text>* {current-grouping-key()}&#xA;</xsl:text>
+        <xsl:for-each-group select="current-group()"
+          group-by="tokenize(a:post_filename(.), '/')[2]" >
+          <xsl:text>** {current-grouping-key()}&#xA;</xsl:text>
+          <xsl:apply-templates mode="nav" select="current-group()"/>
+        </xsl:for-each-group>
+      </xsl:for-each-group>
     </xsl:result-document>
 
     <xsl:result-document format="adoc" href="export/modules/ROOT/pages/index.adoc">
@@ -102,6 +109,8 @@ asciidoc:
       <xsl:text>:page-wp-post_id: {wp:post_id}&#xA;</xsl:text>
       <xsl:text>:page-wp-link: {link}&#xA;</xsl:text>
       <xsl:text>:page-date: {wp:post_date}&#xA;</xsl:text>
+      <xsl:text>:page-wp-tags: {string-join(category[@domain="post_tag"], ', ')}&#xA;</xsl:text>
+      <xsl:text>:page-wp-categories: {string-join(category[@domain="category"], ', ')}&#xA;</xsl:text>
       <xsl:text>:keywords: {string-join(category, ', ')}&#xA;&#xA;</xsl:text>
 
       <xsl:try>
