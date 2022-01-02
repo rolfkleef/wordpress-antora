@@ -74,13 +74,13 @@ asciidoc:
     
     <xsl:apply-templates/>
     
-    <xsl:result-document method="text" href="export/modules/ROOT/nav.adoc">
+    <xsl:result-document format="adoc" href="export/modules/ROOT/nav.adoc">
       <xsl:apply-templates mode="nav">
         <xsl:sort select="link"/>
       </xsl:apply-templates>
     </xsl:result-document>
 
-    <xsl:result-document method="text" href="export/modules/ROOT/pages/index.adoc">= Wordpress export to Antora
+    <xsl:result-document format="adoc" href="export/modules/ROOT/pages/index.adoc">= Wordpress export to Antora
 
 include::wordpress-antora::partial$blog-index-page-hints.adoc[]
     </xsl:result-document>
@@ -91,7 +91,7 @@ include::wordpress-antora::partial$blog-index-page-hints.adoc[]
   </xsl:template>
     
   <xsl:template match="item[wp:post_type='post' and wp:status='publish']">
-    <xsl:result-document method="text" 
+    <xsl:result-document format="adoc" 
       href="export/modules/ROOT/pages/{a:post_filename(.)}">= {title}
 <xsl:if test="dc:creator!=''">{dc:creator}
 </xsl:if>:page-wp-post_id: {wp:post_id}
