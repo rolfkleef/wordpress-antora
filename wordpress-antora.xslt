@@ -103,6 +103,7 @@ include::wordpress-antora::partial$blog-index-page-hints.adoc[]
 
 <xsl:try>
   <xsl:sequence>
+    <xsl:apply-templates select="parse-xml(a:html_content(content:encoded))" mode="wordpress-asciidoc"/>
     <xsl:message>Processed: {link}</xsl:message>
   </xsl:sequence>
   <xsl:catch>
