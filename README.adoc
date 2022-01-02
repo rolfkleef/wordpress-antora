@@ -17,7 +17,7 @@ It works with Asciidoc files and git repositories as content sources.
 . *Antora is NOT designed for blogging*
 +
 Antora version 3 opens the way to add extensions.
-Maybe someone will write an extension that adds a feature that is useful 
+Maybe someone will write an extension that adds a feature that is useful
 for blogging. Maybe not...
 +
 If you rely on Wordpress plugins, comments, widgets, and what not,
@@ -25,7 +25,7 @@ you will need to find your own way to add equivalent features to Antora.
 
 . *This is EXPERIMENTAL and LIMITED software.*
 +
-All it does is unpack your Wordpress posts and pages into individual source 
+All it does is unpack your Wordpress posts and pages into individual source
 files, using Antora's content structure.
 It attempts to convert Wordpress's way of storing content into Asciidoc.
 This should help you evaluate how much work is still needed.
@@ -42,22 +42,36 @@ This should help you evaluate how much work is still needed.
 * Install dependencies:
 +
   $ npm i
-  
-* Export all content from a Wordpress site as XML file
-(WP admin menu _Tools > Export_)
-and save it as `wordpress-export.xml` in the main directory.
 
-* Run the conversion:
+* Run the conversion of the demo content:
 +
   $ npm run convert
-  
+
 * Generate the Antora site:
 +
   $ npm run build
-  
+
 * Start a local server to see the website:
 +
   $ npm run serve
+
+== Next
+
+The repository contains an export of a small
+https://wp2antora.wordpress.com/[Wordpress-Antora demo site^].
+
+Export all content from your own Wordpress site (WP admin menu _Tools > Export_)
+and save the unzipped XML file in the main directory.
+
+* You can specify which Wordpress export file to convert:
++
+  $ WORDPRESS_EXPORT=my-export.xml npm run convert
+
+* You can copy and adapt the playbook file and use that:
++
+  $ PLAYBOOK=my-antora-playbook.yml npm run build
+
+* The convertor adds and overwrites files in the `export/` directory.
 
 [TIP]
 ====
@@ -67,16 +81,3 @@ You can continue using Wordpress while setting up your new website.
 Do another export from Wordpress and conversion to Antora,
 and use version control to merge the changes.
 ====
-
-== Notes
-
-* You can specify which Wordpress export file to use:
-+
-  $ WORDPRESS_EXPORT=my-export.xml npm run convert
-
-* You can copy and adapt the playbook file and use that:
-+
-  $ PLAYBOOK=my-antora-playbook.yml npm run build
-  
-* The convertor adds and overwrites files in the `export/` directory.
-  
