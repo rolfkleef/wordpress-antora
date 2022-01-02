@@ -1,0 +1,82 @@
+= Wordpress to Antora convertor
+
+Your situation::
+You currently have a website in Wordpress that consists of "just" blog posts
+and content pages, and you're longing for better version control, reuse of
+content, and just plain text markup to write content.
++
+A static site generator would be a good alternative.
+Writing in Markdown would be an obvious choices,
+but maybe too limited for what you want.
+
+https://antora.org[Antora^] is a static site generator for documentation sites.
+It works with Asciidoc files and git repositories as content sources.
+
+[CAUTION]
+====
+. *Antora is NOT designed for blogging*
++
+Antora version 3 opens the way to add extensions.
+Maybe someone will write an extension that adds a feature that is useful 
+for blogging. Maybe not...
++
+If you rely on Wordpress plugins, comments, widgets, and what not,
+you will need to find your own way to add equivalent features to Antora.
+
+. *This is EXPERIMENTAL and LIMITED software.*
++
+All it does is unpack your Wordpress posts and pages into individual source 
+files, using Antora's content structure.
+It attempts to convert Wordpress's way of storing content into Asciidoc.
+This should help you evaluate how much work is still needed.
+====
+
+== Prerequisites
+
+* Node v16 or newer.
+
+== Setup
+
+* Clone this repository.
+
+* Install dependencies:
++
+  $ npm i
+  
+* Export all content from a Wordpress site as XML file
+(WP admin menu _Tools > Export_)
+and save it as `wordpress-export.xml` in the main directory.
+
+* Run the conversion:
++
+  $ npm run convert
+  
+* Generate the Antora site:
++
+  $ npm run build
+  
+* Start a local server to see the website:
++
+  $ npm run serve
+
+[TIP]
+====
+Copy everything under `/export` to the repository for your new website.
+
+You can continue using Wordpress while setting up your new website.
+Do another export from Wordpress and conversion to Antora,
+and use version control to merge the changes.
+====
+
+== Notes
+
+* You can specify which Wordpress export file to use:
++
+  $ WORDPRESS_EXPORT=my-export.xml npm run convert
+
+* You can copy and adapt the playbook file and use that:
++
+  $ PLAYBOOK=my-antora-playbook.yml npm run build
+  
+* The convertor adds and overwrites files in the `export/` directory.
+  
