@@ -50,7 +50,9 @@ output:
 content:
   sources:
   - url: .
-    start_path: export/
+    start_paths: 
+    - export/
+    - docs/
   
 ui:
   bundle:
@@ -66,6 +68,7 @@ asciidoc:
   attributes:
     page-pagination: true
     hide-uri-scheme@: true
+    experimental: true
 </xsl:text>
     </xsl:result-document>
     
@@ -75,6 +78,11 @@ asciidoc:
       <xsl:apply-templates mode="nav">
         <xsl:sort select="link"/>
       </xsl:apply-templates>
+    </xsl:result-document>
+
+    <xsl:result-document method="text" href="export/modules/ROOT/pages/index.adoc">= Wordpress export to Antora
+
+include::wordpress-antora::partial$blog-index-page-hints.adoc[]
     </xsl:result-document>
   </xsl:template>
 

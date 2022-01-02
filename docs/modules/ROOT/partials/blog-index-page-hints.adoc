@@ -1,0 +1,6 @@
+== Hints
+
+* The xref:wordpress-antora::index.adoc[] documentation is included.
+* Use keys to navigate:
+** Use kbd:[/] to activate the search box, kbd:[Esc] to leave it again. 
+** When not active, use arrows left and right to move to the previous or next page.

@@ -1,0 +1,5 @@
+name: wordpress-antora
+title: Wordpress to Antora convertor
+version: ~
+nav:
+- modules/ROOT/nav.adoc
