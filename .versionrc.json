@@ -1,0 +1,8 @@
+{
+  "bumpFiles": [
+    {
+      "filename": "docs/antora.yml",
+      "updater": "docs/antora-version-updater.js"
+    }
+  ]
+}

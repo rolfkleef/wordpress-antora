@@ -6,13 +6,15 @@
   "scripts": {
     "convert": "xslt3 -xsl:wordpress-antora.xslt -s:${WORDPRESS_EXPORT:-wordpress-export.xml}",
     "build": "antora --stacktrace ${PLAYBOOK:-playbook-wordpress-export.yml}",
-    "serve": "http-server build/site"
+    "serve": "http-server build/site",
+    "release": "standard-version"
   },
   "private": true,
   "devDependencies": {
-	"@antora/lunr-extension": "^1.0.0-alpha.1",
-	"antora": "^3.0.0",
+    "@antora/lunr-extension": "^1.0.0-alpha.1",
+    "antora": "^3.0.0",
     "http-server": "^14.0.0",
+    "standard-version": "^9.3.2",
     "xslt3": "^2.3.0"
   }
 }
