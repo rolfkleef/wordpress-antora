@@ -91,17 +91,13 @@ include::wordpress-antora::partial$blog-index-page-hints.adoc[]
   </xsl:template>
     
   <xsl:template match="item[wp:post_type='post' and wp:status='publish']">
-    <xsl:variable name="keywords">
-      <xsl:apply-templates select="category"/>
-    </xsl:variable>
     <xsl:result-document method="text" 
       href="export/modules/ROOT/pages/{a:post_filename(.)}">= {title}
 <xsl:if test="dc:creator!=''">{dc:creator}
 </xsl:if>:page-wp-post_id: {wp:post_id}
 :page-wp-link: {link}
 :page-date: {wp:post_date}
-:page-wp-keywords: {string-join($keywords, ", ")}
-:keywords: {string-join($keywords, ", ")}
+:keywords: {string-join(category, ', ')}
 
 <xsl:try>
   <xsl:apply-templates select="parse-xml(a:html_content(content:encoded))/body" mode="html-asciidoc"/>
